@@ -44,22 +44,27 @@ function ie6update_admin_settings() {
 }
 
 /**
- * Implementation of hook_footer().
+ * Implementation of hook_page_alter().
  */
-function ie6update_footer($main = 0) {
+function ie6update_page_alter(&$page) {
   $message = variable_get('ie6update_update_bar_message', 'Internet Explorer is missing updates required to view this site. Click here to update... ');
   $url = variable_get('ie6update_destination_url', 'http://www.microsoft.com/windows/internet-explorer/default.aspx');
-
-  return '
+  $js =  '
     <!--[if IE 6]>
       <script type="text/javascript"> 
         var IE6UPDATE_OPTIONS = {
-          icons_path: "'. url(drupal_get_path('module', 'ie6update'), array('absolute' => TRUE)) .'/images/",
-          message: "'. $message .'",
-          url: "'. $url .'"
+          icons_path: "' . url(drupal_get_path('module', 'ie6update'), array('absolute' => TRUE)) . '/images/",
+          message: "' . $message . '",
+          url: "' . $url . '"
         }
       </script>
-      <script type="text/javascript" src="'. url(drupal_get_path('module', 'ie6update') .'/ie6update.js', array('absolute' => TRUE)) .'"></script>
+      <script type="text/javascript" src="' . url(drupal_get_path('module', 'ie6update') . '/ie6update.js', array('absolute' => TRUE)) . '"></script>
     <![endif]-->
   ';
+  if ($message && $url) {
+    $page['page_bottom']['ie6update']= array(
+      '#type' => 'markup',
+      '#markup' => $js,
+    );
+  }
 }

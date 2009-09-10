@@ -47,8 +47,10 @@
  * @version $Revision$
  * @license http://www.gnu.org/licenses/gpl-3.0.txt GPL
  */
- 
- 
+(function ($) {
+  // Original JavaScript code.
+
+
 try {
   document.execCommand("BackgroundImageCache", true, true);
 } catch(err) {}
@@ -321,3 +323,4 @@ jQuery(document).ready(function($) {
 });
 
 
+})(jQuery);
