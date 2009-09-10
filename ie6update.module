@@ -42,14 +42,15 @@ function ie6update_admin_settings() {
   );
   return system_settings_form($form);
 }
+
 /**
- * Add the script to the scripts variable before the page is built
+ * Implementation of hook_footer().
  */
-function ie6update_preprocess_page(&$vars, $hook) {
+function ie6update_footer($main = 0) {
   $message = variable_get('ie6update_update_bar_message', 'Internet Explorer is missing updates required to view this site. Click here to update... ');
   $url = variable_get('ie6update_destination_url', 'http://www.microsoft.com/windows/internet-explorer/default.aspx');
-  
-  $vars['scripts'] .= '
+
+  return '
     <!--[if IE 6]>
       <script type="text/javascript"> 
         var IE6UPDATE_OPTIONS = {
@@ -61,5 +62,4 @@ function ie6update_preprocess_page(&$vars, $hook) {
       <script type="text/javascript" src="'. url(drupal_get_path('module', 'ie6update') .'/ie6update.js', array('absolute' => TRUE)) .'"></script>
     <![endif]-->
   ';
-  /**/
 }
