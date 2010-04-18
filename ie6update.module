@@ -56,7 +56,7 @@ function ie6update_page_alter(&$page) {
       <script type="text/javascript">
         var IE6UPDATE_OPTIONS = {
           icons_path: "' . $icon_path .'",
-          message: "' . $message . '",
+          message: "' . t(filter_xss_admin($message)) . '",
           url: "' . $url . '"
         }
       </script>
