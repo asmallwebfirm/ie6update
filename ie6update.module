@@ -14,7 +14,7 @@
  */
 function ie6update_menu() {
   $items = array();
-  $items['admin/settings/ie6update'] = array(
+  $items['admin/config/user-interface/ie6update'] = array(
     'title' => 'IE6 Update',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('ie6update_admin_settings'),
@@ -51,7 +51,7 @@ function ie6update_page_alter(&$page) {
   $url = variable_get('ie6update_destination_url', 'http://www.microsoft.com/windows/internet-explorer/default.aspx');
   $js =  '
     <!--[if IE 6]>
-      <script type="text/javascript"> 
+      <script type="text/javascript">
         var IE6UPDATE_OPTIONS = {
           icons_path: "' . url(drupal_get_path('module', 'ie6update'), array('absolute' => TRUE)) . '/images/",
           message: "' . $message . '",
