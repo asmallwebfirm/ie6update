@@ -44,22 +44,29 @@ function ie6update_admin_settings() {
 }
 
 /**
+ * Implements hook_init().
+ */
+function ie6update_init() {
+  drupal_add_js(drupal_get_path('module', 'ie6update') .'/ie6update.js');
+}
+
+/**
  * Implementation of hook_footer().
  */
 function ie6update_footer($main = 0) {
+  global $base_url, $base_path;
   $message = variable_get('ie6update_update_bar_message', 'Internet Explorer is missing updates required to view this site. Click here to update... ');
   $url = variable_get('ie6update_destination_url', 'http://www.microsoft.com/windows/internet-explorer/default.aspx');
-
+  $icon_path = $base_url . '/' . drupal_get_path('module', 'ie6update') .'/images/';
   return '
     <!--[if IE 6]>
-      <script type="text/javascript"> 
+      <script type="text/javascript">
         var IE6UPDATE_OPTIONS = {
-          icons_path: "'. url(drupal_get_path('module', 'ie6update'), array('absolute' => TRUE)) .'/images/",
+          icons_path: "'. $icon_path .'",
           message: "'. $message .'",
           url: "'. $url .'"
         }
       </script>
-      <script type="text/javascript" src="'. url(drupal_get_path('module', 'ie6update') .'/ie6update.js', array('absolute' => TRUE)) .'"></script>
     <![endif]-->
   ';
 }
