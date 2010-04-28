@@ -44,13 +44,6 @@ function ie6update_admin_settings() {
 }
 
 /**
- * Implements hook_init().
- */
-function ie6update_init() {
-  drupal_add_js(drupal_get_path('module', 'ie6update') .'/ie6update.js');
-}
-
-/**
  * Implementation of hook_footer().
  */
 function ie6update_footer($main = 0) {
@@ -67,6 +60,7 @@ function ie6update_footer($main = 0) {
           url: "'. $url .'"
         }
       </script>
+      <script type="text/javascript" src="'. url(drupal_get_path('module', 'ie6update') .'/ie6update.js', array('absolute' => TRUE)) .'"></script>
     <![endif]-->
   ';
 }
