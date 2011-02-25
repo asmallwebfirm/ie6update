@@ -1,5 +1,4 @@
 /**
- * $Id$
    IE6Update.js
    
  * IE6Update is free software; you can redistribute it and/or modify
