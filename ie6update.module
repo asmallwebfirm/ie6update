@@ -23,6 +23,16 @@ function ie6update_menu() {
 }
 
 /**
+ * Implementation of hook_help().
+ */
+function ie6update_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#ie6update':
+      return filter_filter('process', 1, NULL, file_get_contents(dirname(__FILE__) . "/README.txt"));
+  }
+}
+
+/**
  * Return the module admin settings form to be rendered
  */
 function ie6update_admin_settings() {
