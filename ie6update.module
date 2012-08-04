@@ -70,6 +70,13 @@ function ie6update_admin_settings() {
     '#type' => 'textfield',
     '#default_value' => variable_get('ie6update_update_bar_message', 'Internet Explorer is missing updates required to view this site. Click here to update... '),
   );
+  $form['ie6update_ie_versions'] = array(
+    '#title' => t('IE Versions'),
+    '#description' => t('The versions of IE for which the update message should be shown.'),
+    '#type' => 'checkboxes',
+    '#options' => drupal_map_assoc(array('IE 6', 'IE 7', 'IE 8', 'IE 9')),
+    '#default_value' => variable_get('ie6update_ie_versions', array('IE 6' => 'IE 6')),
+  );
 
   return system_settings_form($form);
 }
@@ -81,9 +88,20 @@ function ie6update_page_alter(&$page) {
   global $base_url;
   $message = variable_get('ie6update_update_bar_message', 'Internet Explorer is missing updates required to view this site. Click here to update... ');
   $url = variable_get('ie6update_destination_url', 'http://www.microsoft.com/windows/internet-explorer/default.aspx');
+  $ie_versions = variable_get('ie6update_ie_versions', array('IE 6' => 'IE 6'));
   $icon_path = $base_url . '/' . drupal_get_path('module', 'ie6update') . '/images/';
+
+  // Generate IE condition string.
+  $ie_conditions = array();
+  foreach ($ie_versions as $version) {
+    if ($version) {
+      $ie_conditions[] = '(' . $version . ')';
+    }
+  }
+  $ie_condition = implode('|', $ie_conditions);
+
   $js =  '
-    <!--[if IE 6]>
+    <!--[if ' . $ie_condition . ']>
       <script type="text/javascript">
         var IE6UPDATE_OPTIONS = {
           icons_path: "' . $icon_path .'",
@@ -94,7 +112,7 @@ function ie6update_page_alter(&$page) {
       <script type="text/javascript" src="' . $base_url . '/' . drupal_get_path('module', 'ie6update') .'/ie6update.js' . '"></script>
     <![endif]-->
   ';
-  if ($message && $url) {
+  if ($message && $url && !empty($ie_conditions)) {
     $page['page_bottom']['ie6update']= array(
       '#type' => 'markup',
       '#markup' => $js,
