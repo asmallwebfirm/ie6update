@@ -78,10 +78,10 @@ function ie6update_admin_settings() {
  * Implements hook_page_alter().
  */
 function ie6update_page_alter(&$page) {
-  global $base_url, $base_path;
+  global $base_url;
   $message = variable_get('ie6update_update_bar_message', 'Internet Explorer is missing updates required to view this site. Click here to update... ');
   $url = variable_get('ie6update_destination_url', 'http://www.microsoft.com/windows/internet-explorer/default.aspx');
-  $icon_path = $base_url . $base_path . drupal_get_path('module', 'ie6update') . '/images/';
+  $icon_path = $base_url . '/' . drupal_get_path('module', 'ie6update') . '/images/';
   $js =  '
     <!--[if IE 6]>
       <script type="text/javascript">
@@ -91,7 +91,7 @@ function ie6update_page_alter(&$page) {
           url: "' . $url . '"
         }
       </script>
-      <script type="text/javascript" src="' . $base_url . $base_path . drupal_get_path('module', 'ie6update') .'/ie6update.js' . '"></script>
+      <script type="text/javascript" src="' . $base_url . '/' . drupal_get_path('module', 'ie6update') .'/ie6update.js' . '"></script>
     <![endif]-->
   ';
   if ($message && $url) {
