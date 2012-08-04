@@ -6,8 +6,8 @@ IE 6 UPDATE MODULE
 SUMMARY
 -------
 
-This module integrates the IE6 Update JavaScript file (ie6update.com) with
-Drupal, unobtrusively encouraging site users to upgrade.
+This module integrates the IE6 Update JavaScript file with Drupal, unobtrusively
+encouraging site users to upgrade their browsers.
 
 
 FEATURES
