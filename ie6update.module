@@ -64,12 +64,12 @@ function ie6update_footer($main = 0) {
     <!--[if IE 6]>
       <script type="text/javascript">
         var IE6UPDATE_OPTIONS = {
-          icons_path: "'. $icon_path .'",
-          message: "'. t(filter_xss_admin($message)) .'",
-          url: "'. $url .'"
+          icons_path: "' . $icon_path . '",
+          message: "' . filter_xss_admin($message) . '",
+          url: "' . $url . '"
         }
       </script>
-      <script type="text/javascript" src="'. $base_url . $base_path . drupal_get_path('module', 'ie6update') .'/ie6update.js' .'"></script>
+      <script type="text/javascript" src="' . $base_url . $base_path . drupal_get_path('module', 'ie6update') . '/ie6update.js' . '"></script>
     <![endif]-->
   ';
 }
